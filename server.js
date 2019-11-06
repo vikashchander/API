@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 })
 
 //routers
-app.use('/api/V1/BootCamp', require('./routes/Api/bootcamp'))
+app.use('/api/V1/BootCamp', require('./routes/Api/bootcamp'));
 
 
 

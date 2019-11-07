@@ -1,12 +1,14 @@
 const express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    {
+        getBootCamp,
+        getBootCamps,
+        putBootCamps,
+        deleteBootCamps
+    } = require('../../controllers/Api/bootcamp');
 
+router.route('/').get(getBootCamps);
+router.route('/:id').put(putBootCamps).delete(deleteBootCamps);
 
-router.get('/', (req, res) => {
-    res.status(200).json({
-        id: 1105,
-        name: 'brad travery'
-    })
-})
 
 module.exports = router;

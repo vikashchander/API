@@ -24,7 +24,7 @@ exports.getBootCamp = (req, res, next) => {
 exports.postBootCamps = (req, res, next) => {
   res.status(200).json({
     sucess: true,
-    msg: `this is a post route ${req.params.id}`
+    msg: `this is a post route  and create new bootcamp${req.params.id}`
   });
 };
 
@@ -44,6 +44,6 @@ exports.putBootCamps = (req, res, next) => {
 exports.deleteBootCamps = (req, res, next) => {
   res.status(200).json({
     sucess: true,
-    msg: `this is a post route ${req.params.id}`
+    msg: `this is a delete route ${req.params.id}`
   });
 };

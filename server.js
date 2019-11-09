@@ -1,5 +1,6 @@
-const express = require('express');
-const dotenv = require('dotenv');
+const express = require('express'),
+    dotenv = require('dotenv'),
+    morgan = require('morgan');
 
 //load env vars
 dotenv.config({
@@ -8,16 +9,19 @@ dotenv.config({
 
 const app = express();
 
+//use morgan 
+app.use(morgan('dev'));
+
 app.get('/', (req, res) => {
     res.status(200).json({
         Name: 'Vikashchander'
     });
 });
 
-//custom logger
-const logger = require('./middlewares/logger/logger');
-//use custom logger
-app.use(logger);
+// //custom logger
+// const logger = require('./middlewares/logger/logger');
+// //use custom logger
+// app.use(logger);
 
 const Port = 8000;
 

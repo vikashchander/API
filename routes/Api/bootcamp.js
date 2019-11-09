@@ -3,12 +3,13 @@ const express = require('express'),
     {
         getBootCamp,
         getBootCamps,
+        postBootCamps,
         putBootCamps,
         deleteBootCamps
     } = require('../../controllers/Api/bootcamp');
 
 router.route('/').get(getBootCamps);
-router.route('/:id').put(putBootCamps).delete(deleteBootCamps);
+router.route('/:id').get(getBootCamp).put(putBootCamps).delete(deleteBootCamps).post(postBootCamps);
 
 
 module.exports = router;

@@ -10,6 +10,8 @@ dotenv.config({
 });
 
 const app = express();
+//body parser
+app.use(express.json());
 
 // connect db
 connectDB();

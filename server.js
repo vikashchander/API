@@ -1,7 +1,8 @@
 const express = require('express'),
   dotenv = require('dotenv'),
   morgan = require('morgan'),
-  colors = require('colors');
+  colors = require('colors'),
+  errorHandler = require('./middlewares/error');
 const connectDB = require('./config/db');
 
 //load env vars
@@ -33,6 +34,7 @@ const Port = 8000;
 
 //routers
 app.use('/api/V1/BootCamp', require('./routes/Api/bootcamp'));
+app.use(errorHandler);
 
 const server = app.listen(
   Port,

@@ -4,9 +4,9 @@ const errorHandler = (err, req, res, next) => {
         ...err
     };
     error.message = err.message;
-    console.error(err.stack.red);
+    // console.error(err.stack.red);
     //find error
-    console.log(err);
+    //  console.log(err);
     // mongoDB objectId failed 
 
     if (err.name === 'CastError') {

@@ -34,6 +34,8 @@ const Port = 8000;
 
 //routers
 app.use('/api/V1/BootCamp', require('./routes/Api/bootcamp'));
+app.use('/api/V1/Courses', require('./routes/Api/courses'));
+
 app.use(errorHandler);
 
 const server = app.listen(

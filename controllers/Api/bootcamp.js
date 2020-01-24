@@ -142,21 +142,14 @@ exports.putBootCamps = asyncHandler(async (req, res, next) => {
 // @route Get /api/v1/bootcamps/:id
 // @acess public
 exports.deleteBootCamps = asyncHandler(async (req, res, next) => {
-  const bootcamp = await BootCamp.findByIdAndDelete(req.params.id, req.body);
+  const bootcamp = await BootCamp.findById(req.params.id, req.body);
   if (!bootcamp) {
-    res.status(400).json({
-      sucess: false
-    })
-    res.status(200).json({
-      sucess: true,
-      msg: `${req.params.id} delete sucessfully`,
-      data: bootcamp
-    })
+    return next(
+      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
+    );
   }
-  res.status(400).json({
-    sucess: false,
-    msg: 'error'
-  })
+  bootcamp.remove();
+  res.status(200).json({ success: true, data: {} });
 
 
 });

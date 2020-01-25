@@ -2,7 +2,7 @@ const express = require('express'),
   dotenv = require('dotenv'),
   morgan = require('morgan'),
   colors = require('colors'),
-  errorHandler = require('./middlewares/error');
+  ErrorHandler = require('./middlewares/error');
 const connectDB = require('./config/db');
 
 //load env vars
@@ -30,13 +30,14 @@ app.get('/', (req, res) => {
 // //use custom logger
 // app.use(logger);
 
+app.use(ErrorHandler);
 const Port = 8000;
 
 //routers
 app.use('/api/V1/BootCamp', require('./routes/Api/bootcamp'));
 app.use('/api/V1/Courses', require('./routes/Api/courses'));
 
-app.use(errorHandler);
+
 
 const server = app.listen(
   Port,

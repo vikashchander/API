@@ -25,7 +25,9 @@ exports.getBootCamps = asyncHandler(async (req, res, next) => {
 
   // Create operators ($gt, $gte, etc)
   queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
-  query = Bootcamp.find(JSON.parse(queryStr)).populate('courses');
+
+  //find resources
+  query = BootCamp.find(JSON.parse(queryStr)).populate('courses');
 
   // Select Fields
   if (req.query.select) {
@@ -68,18 +70,14 @@ exports.getBootCamps = asyncHandler(async (req, res, next) => {
       page: page - 1,
       limit
     };
-  }
+  };
+
   res.status(200).json({
     sucess: true,
     count: bootcamps.length,
     pagination,
     data: bootcamps
   });
-  res.status(400).json({
-    sucess: false
-  });
-
-
 });
 
 // @desc Get single bootcamp
@@ -97,8 +95,6 @@ exports.getBootCamp = asyncHandler(async (req, res, next) => {
     sucess: true,
     data: bootcamp
   })
-  next(error);
-
 });
 
 // @desc post single bootcamp

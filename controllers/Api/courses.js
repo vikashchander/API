@@ -5,7 +5,7 @@ const Course = require('../../models/Course');
 // @desc      Get single course
 // @route     GET /api/v1/courses/:id
 // @access    Public
-exports.getCourses = asyncHandler(async (req, res, next) => {
+exports.getCourse = asyncHandler(async (req, res, next) => {
     const courses = await Course.findById().populate({
         path: 'bootcamp',
         select: 'name description'
@@ -51,10 +51,32 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
     });
 });
 
+// @desc      add new courses
+// @route     POST /api/v1/bootcamps/:bootcampId/course/:courseId
+// @access    private 
+exports.addCourse = asyncHandler(async (req, res, next) => {
+    req.body.bootcamp = req.params.bootcampId;
+
+    const bootcamp = await Bootcamp.findById(req.params.bootcampId);
+
+    if (!bootcamp) {
+        return next(
+            new ErrorResponse(`No bootcamp with the id of ${req.params.id}`),
+            404
+        );
+    }
+    const course = await Course.create(req.body)
+    res.status(200).json({
+        success: true,
+        data: course
+    });
+});
+
+
 // @desc      update courses
 // @route     POST /api/v1/bootcamps/:bootcampId/course/:courseId
 // @access    private 
-exports.updateCourses = asyncHandler(async (req, res, next) => {
+exports.updateCourse = asyncHandler(async (req, res, next) => {
     let course = await Course.findById(req.params.id);
 
 
@@ -71,14 +93,14 @@ exports.updateCourses = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        count: courses.length,
-        data: courses
+        data: course
     });
 });
+
 // @desc      delete courses
 // @route     POST /api/v1/bootcamps/:bootcampId/courses/:courseId
 // @access    private 
-exports.deleteCourses = asyncHandler(async (req, res, next) => {
+exports.deleteCourse = asyncHandler(async (req, res, next) => {
     const courses = await Course.findByIdAndDelete()
     if (!course) {
         return next(
